@@ -1,0 +1,46 @@
+package daoImpl;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion {
+
+	public static Conexion instancia;
+	private Connection conexion;
+	private static final String url = "jdbc:mysql://localhost:3306/db_personas";
+    private static final String user = "root";
+    private static final String password = "root";
+	
+	private Conexion() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			this.conexion = DriverManager.getConnection(url, user, password);
+			this.conexion.setAutoCommit(false);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Conexion getConexion() {
+		if(instancia == null) {
+			instancia = new Conexion();
+		}
+		return instancia;
+	}
+
+	public Connection getSQLConexion() {
+		return this.conexion;
+	}
+	
+	public void cerrarConexion() {
+		try {
+			this.conexion.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		instancia = null;
+	}
+}
