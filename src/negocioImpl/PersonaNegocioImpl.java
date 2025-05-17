@@ -20,7 +20,7 @@ IPersonaDao iPersonaDao = new PersonaDaoImpl();
 	return estado;
 }
 
-	public boolean modificar(Persona dni) {
+	public boolean modificar(Persona dni) { 
     boolean estado = false;
 
 	if (dni != null && !dni.getDni().isEmpty()) {

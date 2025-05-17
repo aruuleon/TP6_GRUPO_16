@@ -3,6 +3,8 @@ package presentacion.vista;
 import javax.swing.*;
 
 import presentacion.controlador.ListarPersonaControlador;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPrincipal extends JFrame {
 

@@ -8,9 +8,10 @@ public class Principal {
 
 	public static void main(String[] args) {
 		VentanaPrincipal ventanaP =  new VentanaPrincipal();
-		  PersonaNegocioImpl negocio = new PersonaNegocioImpl(); 
-		 Controlador controlador = new Controlador(ventanaP, negocio);
+		PersonaNegocioImpl negocio = new PersonaNegocioImpl(); 
+		Controlador controlador = new Controlador(ventanaP, negocio);
 		ventanaP.setVisible(true);
 	}
 	
 }
+			
