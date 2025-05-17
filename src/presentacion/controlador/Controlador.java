@@ -79,7 +79,7 @@ public class Controlador implements ActionListener {
 			private void refrescarTabla()
 			{
 				this.personasEnTabla = (ArrayList<Persona>) pNeg.readAll();
-				this.pnlIngresoPersonas.llenarTabla(this.personasEnTabla);
+				//this.pnlIngresoPersonas.llenarTabla(this.personasEnTabla);
 			}
 	
 

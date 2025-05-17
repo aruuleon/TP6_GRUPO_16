@@ -54,13 +54,13 @@ public class PanelAgregarPersonas extends JPanel {
         panelForm.add(btnAgregar);
         panelForm.add(btnBorrar);
 
-        // Tabla para mostrar personas
+    /*    // Tabla para mostrar personas
         modeloTabla = new DefaultTableModel(new Object[]{"Dni", "Nombre", "Apellido"}, 0);
         tablaPersonas = new JTable(modeloTabla);
         JScrollPane scrollPane = new JScrollPane(tablaPersonas);
-
+        */
         add(panelForm, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+       // add(scrollPane, BorderLayout.CENTER);
     }
 
     // Getters
@@ -88,10 +88,10 @@ public class PanelAgregarPersonas extends JPanel {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public void llenarTabla(ArrayList<Persona> personas) {
+   /* public void llenarTabla(ArrayList<Persona> personas) {
         modeloTabla.setRowCount(0); // Limpiar tabla
         for (Persona p : personas) {
             modeloTabla.addRow(new Object[]{p.getDni(), p.getNombre(), p.getApellido()});
         }
-    }
+    }*/
 }

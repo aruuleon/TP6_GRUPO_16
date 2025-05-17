@@ -2,6 +2,8 @@ package presentacion.vista;
 
 import javax.swing.*;
 
+import presentacion.controlador.ListarPersonaControlador;
+
 public class VentanaPrincipal extends JFrame {
 
 private static final long serialVersionUID = 1L;
@@ -17,8 +19,6 @@ private JMenuItem menuModificar;
 private JMenuItem menuEliminar;
 
 private JMenuItem menuListar;
-
-
 
 public VentanaPrincipal() {
 
@@ -52,6 +52,12 @@ public VentanaPrincipal() {
 		menuListar = new JMenuItem("Listar");
 
 		mnPersonas.add(menuListar);
+		
+		
+		 new ListarPersonaControlador(this);  // aca
+
+		
+		
 
 }
 
@@ -113,5 +119,6 @@ return mnPersonas;
 this.mnPersonas = mnPersonas;
 
 }
+	
 
 }
