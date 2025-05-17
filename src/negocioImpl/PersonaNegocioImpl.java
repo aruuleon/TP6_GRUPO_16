@@ -41,4 +41,12 @@ IPersonaDao iPersonaDao = new PersonaDaoImpl();
     return iPersonaDao.listar();
 	}
 
+	public boolean insert(Persona nuevaPersona) {
+		  return iPersonaDao.agregar(nuevaPersona);
+	}
+
+	public ArrayList<Persona> readAll() {
+		return iPersonaDao.readAll();
+	}
+
 }

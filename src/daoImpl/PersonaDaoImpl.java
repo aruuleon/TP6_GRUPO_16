@@ -8,9 +8,9 @@ import entidad.Persona;
 public class PersonaDaoImpl implements IPersonaDao {
 
 	private Connection conexion;
-	private static final String agregar = "INSERT INTO personas(dni, nombre, apellido) VALUES(?, ?, ?)";
-    private static final String modificar = "UPDATE personas SET nombre = ?, apellido = ? WHERE dni = ?";
-    private static final String eliminar = "DELETE FROM personas WHERE dni = ?";
+	private static final String agregar = "INSERT INTO personas(Dni, Nombre, Apellido) VALUES(?, ?, ?)";
+    private static final String modificar = "UPDATE personas SET Nombre = ?, Apellido = ? WHERE Dni = ?";
+    private static final String eliminar = "DELETE FROM personas WHERE Dni = ?";
     private static final String listar = "SELECT * FROM personas";
     
     public PersonaDaoImpl() {
@@ -105,10 +105,16 @@ public class PersonaDaoImpl implements IPersonaDao {
     }
     
     private Persona getPersona(ResultSet resultSet) throws SQLException {
-		String dni = resultSet.getString("dni");
-		String nombre = resultSet.getString("nombre");
-		String apellido = resultSet.getString("apellido");
+		String dni = resultSet.getString("Dni");
+		String nombre = resultSet.getString("Nombre");
+		String apellido = resultSet.getString("Apellido");
 		return new Persona(dni, nombre, apellido);
+	}
+
+	@Override
+	public ArrayList<Persona> readAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
   
 }

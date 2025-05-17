@@ -8,7 +8,7 @@ public class Conexion {
 
 	public static Conexion instancia;
 	private Connection conexion;
-	private static final String url = "jdbc:mysql://localhost:3306/db_personas";
+	private static final String url = "jdbc:mysql://localhost:3306/bdpersonas";
     private static final String user = "root";
     private static final String password = "root";
 	

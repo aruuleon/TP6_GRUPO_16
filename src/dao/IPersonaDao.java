@@ -10,5 +10,6 @@ public interface IPersonaDao {
 	boolean modificar(Persona persona);
     boolean eliminar(String dni);
     ArrayList<Persona> listar();
+	ArrayList<Persona> readAll();
     
 }

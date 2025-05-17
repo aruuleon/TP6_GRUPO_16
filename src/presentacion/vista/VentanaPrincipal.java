@@ -18,6 +18,8 @@ private JMenuItem menuEliminar;
 
 private JMenuItem menuListar;
 
+
+
 public VentanaPrincipal() {
 
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
