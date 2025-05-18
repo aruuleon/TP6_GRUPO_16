@@ -104,7 +104,7 @@ public class Controlador implements ActionListener {
 				
 				if (pI.eliminar(dni)) {
 					refrescarTabla();
-		
+					this.pnlEliminarPersonas.actualizarLista();
 					this.pnlEliminarPersonas.mostrarMensaje("Usuario eliminado con exito");
 				}
 				else {
@@ -112,6 +112,8 @@ public class Controlador implements ActionListener {
 					this.pnlEliminarPersonas.mostrarMensaje("No se puede eliminar el usuario");
 				}
 			}		
+			
+			
 			
 			/*
 			private void actualizarJlist() {  

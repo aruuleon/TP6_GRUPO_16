@@ -61,6 +61,17 @@ public class PanelEliminarPersonas extends JPanel {
 		add(btnEliminarUsuario);
 		
 	}
+	
+	
+	
+	public void actualizarLista() {
+	    listModel.clear();
+	    PersonaNegocioImpl pI = new PersonaNegocioImpl();
+	    for (Persona p : pI.listar()) {
+	        listModel.addElement(p);
+	    }
+	}
+	
 
 	public JList getListUsuarios() {
 		return listUsuarios;
