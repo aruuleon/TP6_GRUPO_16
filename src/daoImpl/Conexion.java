@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
+public class Conexion implements AutoCloseable{
 
 	public static Conexion instancia;
 	private Connection conexion;
-	private static final String url = "jdbc:mysql://localhost:3306/bdpersonas";
+    private static final String url = "jdbc:mysql://localhost:3306/bdpersonas?useSSL=false&autoReconnect=true";
     private static final String user = "root";
     private static final String password = "root";
 	
@@ -30,17 +30,32 @@ public class Conexion {
 		return instancia;
 	}
 
-	public Connection getSQLConexion() {
-		return this.conexion;
-	}
-	
+	 public Connection getSQLConexion() {
+	        try {
+	            if(this.conexion == null || this.conexion.isClosed()) {
+	                this.conexion = DriverManager.getConnection(url, user, password);
+	                this.conexion.setAutoCommit(false);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return this.conexion;
+	    }
+	 
 	public void cerrarConexion() {
 		try {
-			this.conexion.close();
+			if(this.conexion != null && !this.conexion.isClosed()) {
+                this.conexion.close();
+			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		instancia = null;
+	}
+
+	@Override
+	public void close() {
+		this.cerrarConexion();
 	}
 }

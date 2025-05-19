@@ -15,6 +15,7 @@ import negocioImpl.PersonaNegocioImpl;
 import presentacion.vista.VentanaPrincipal;
 import presentacion.vista.PanelAgregarPersonas;
 import presentacion.vista.PanelEliminarPersonas;
+import presentacion.vista.PanelModificarPersonas;
 
 
 public class Controlador implements ActionListener {
@@ -22,6 +23,7 @@ public class Controlador implements ActionListener {
 	private VentanaPrincipal ventanaPrincipal;
 	private PanelAgregarPersonas pnlIngresoPersonas;
 	private PanelEliminarPersonas pnlEliminarPersonas;
+	private PanelModificarPersonas pnlModificarPersonas;
 	
 	private PersonaNegocioImpl pNeg;
 	private ArrayList<Persona> personasEnTabla;
@@ -35,7 +37,7 @@ public class Controlador implements ActionListener {
 		
 		//Instancio los paneles
 		this.pnlIngresoPersonas = new PanelAgregarPersonas();
-		
+		this.pnlModificarPersonas = new PanelModificarPersonas();
 		this.pnlEliminarPersonas = new PanelEliminarPersonas();
 
 		
@@ -48,9 +50,21 @@ public class Controlador implements ActionListener {
 		
 		//Evento del menu del frame principal llama a ventana eliminar
 		this.ventanaPrincipal.getMenuEliminar().addActionListener(a->EventoClickMenu_AbrirPanel_EliminarPersona(a));
-		
 		this.pnlEliminarPersonas.getBtnEliminarUsuario().addActionListener(a->EventoClickEliminar_EliminarPesona_PanelEliminarPersonas(a));
-		}
+		
+		// Evento del menú Modificar
+        this.ventanaPrincipal.getMenuModificar().addActionListener(a -> {
+            EventoClickMenu_AbrirPanel_ModificarPersona(a);
+            actualizarListaPersonas();
+        });
+        
+        // Evento del botón Modificar
+        this.pnlModificarPersonas.getBtnModificar().addActionListener(a -> {
+            EventoClickModificar_PanelModificarPersonas(a);
+            actualizarListaPersonas(); // Actualizar lista después de modificar
+        });
+	}
+	
 	
 	//EventoClickMenu abrir PanelAgregarPersonas
 			public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
@@ -113,8 +127,50 @@ public class Controlador implements ActionListener {
 				}
 			}		
 			
-			
-			
+			// Método para abrir el panel de modificación
+		    public void EventoClickMenu_AbrirPanel_ModificarPersona(ActionEvent a) {        
+		        ventanaPrincipal.getContentPane().removeAll();
+		        ventanaPrincipal.getContentPane().add(pnlModificarPersonas);
+		        ventanaPrincipal.getContentPane().repaint();
+		        ventanaPrincipal.getContentPane().revalidate();
+		    }
+		    
+		    private void actualizarListaPersonas() {
+		        try {
+		            ArrayList<Persona> personas = pNeg.listar(); 
+		            if (personas == null) { 
+		                personas = new ArrayList<>();
+		            }
+		            pnlModificarPersonas.setListaPersonas(personas);
+		        } catch (Exception e) {
+		            pnlModificarPersonas.mostrarMensaje("Error al cargar personas: " + e.getMessage());
+		            pnlModificarPersonas.setListaPersonas(new ArrayList<>());
+		        }
+		    }
+		    
+		    // Método para modificar persona
+		    private void EventoClickModificar_PanelModificarPersonas(ActionEvent a) {
+		        Persona personaSeleccionada = pnlModificarPersonas.getListaPersonas().getSelectedValue();
+		        
+		        if (personaSeleccionada == null) {
+		            pnlModificarPersonas.mostrarMensaje("Seleccione una persona de la lista");
+		            return;
+		        }
+		        
+		        // Crear persona con los datos modificados (mismo DNI)
+		        Persona personaModificada = new Persona(
+		            personaSeleccionada.getDni(), // DNI no cambia
+		            pnlModificarPersonas.getTxtNombre().getText(),
+		            pnlModificarPersonas.getTxtApellido().getText()
+		        );
+		        
+		        if (pNeg.modificar(personaModificada)) {
+		            pnlModificarPersonas.mostrarMensaje("Persona modificada con éxito");
+		            actualizarListaPersonas();
+		        } else {
+		            pnlModificarPersonas.mostrarMensaje("Error al modificar persona");
+		        }
+		    }
 			/*
 			private void actualizarJlist() {  
 				DefaultListModel<Persona> listModel = new DefaultListModel<Persona>();
