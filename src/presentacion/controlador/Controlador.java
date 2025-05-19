@@ -69,6 +69,7 @@ public class Controlador implements ActionListener {
 	//EventoClickMenu abrir PanelAgregarPersonas
 			public void  EventoClickMenu_AbrirPanel_AgregarPersona(ActionEvent a)
 			{		
+				
 				ventanaPrincipal.getContentPane().removeAll();
 				ventanaPrincipal.getContentPane().add(pnlIngresoPersonas);
 				ventanaPrincipal.getContentPane().repaint();
@@ -77,6 +78,7 @@ public class Controlador implements ActionListener {
 			
 			public void  EventoClickMenu_AbrirPanel_EliminarPersona(ActionEvent a)
 			{				
+				pnlEliminarPersonas.actualizarLista();
 				ventanaPrincipal.getContentPane().removeAll();
 				ventanaPrincipal.getContentPane().add(pnlEliminarPersonas);
 				ventanaPrincipal.getContentPane().repaint();
